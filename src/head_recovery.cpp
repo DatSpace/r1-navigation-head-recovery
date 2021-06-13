@@ -81,6 +81,7 @@ namespace head_recovery
     if (yarp_ports_.size() < 2)
     {
       ROS_ERROR("There need to be at least two ports specified in the config");
+      return;
     }
 
     ROS_WARN("Head movement recovery behavior started.");
@@ -95,7 +96,7 @@ namespace head_recovery
       pub_.publish(message);
       message.data = "write " + yarp_ports_[1] + " set pos 3 " + std::to_string(movement_coords_[i][0]);
       pub_.publish(message);
-      message.data = "write " + yarp_ports_[1] + " set pos 2 " + std::to_string(movement_coords_[i][1]);
+      message.data = "write " + yarp_ports_[1] + " set pos 1 " + std::to_string(movement_coords_[i][1]);
       pub_.publish(message);
       ros::Duration(2.0).sleep();
     }
@@ -107,7 +108,7 @@ namespace head_recovery
 
     message.data = "write " + yarp_ports_[1] + " set pos 3 0";
     pub_.publish(message);
-    message.data = "write " + yarp_ports_[1] + " set pos 2 0";
+    message.data = "write " + yarp_ports_[1] + " set pos 1 0";
     pub_.publish(message);
   }
 }; // namespace head_recovery
